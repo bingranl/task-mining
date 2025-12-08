@@ -90,14 +90,38 @@ class GeminiClassifier:
             return "ERROR"
 
     def run(self, input_file: str, output_file: str):
+        if not os.path.exists(input_file):
+            print(f"Error: Input file {input_file} not found.")
+            return
+
         with open(input_file, 'r') as f:
             pairs = json.load(f)
             
+        # Load existing results to skip already processed ones
+        existing_results = []
+        processed_commits = set()
+        
+        if os.path.exists(output_file):
+            try:
+                with open(output_file, 'r') as f:
+                    existing_results = json.load(f)
+                    processed_commits = {r["good_commit"] for r in existing_results}
+                    print(f"Loaded {len(existing_results)} existing classifications.")
+            except Exception:
+                print("Warning: Could not load existing results, starting fresh.")
+
         print(f"Classifying {len(pairs)} pairs with Gemini...")
         
-        results = []
+        results = existing_results
+        new_count = 0
+        
         for i, pair in enumerate(pairs):
             good_commit = pair["good_commit"]
+            
+            if good_commit in processed_commits:
+                print(f"[{i+1}/{len(pairs)}] Skipping {good_commit[:7]} (Already processed)")
+                continue
+                
             msg = pair["good_msg"]
             
             print(f"[{i+1}/{len(pairs)}] Fetching diff for {good_commit[:7]}...")
@@ -109,12 +133,21 @@ class GeminiClassifier:
             
             pair["ai_is_dependency_update"] = ai_verdict
             results.append(pair)
+            processed_commits.add(good_commit)
+            new_count += 1
+            
+            # Save incrementally every 5 items
+            if new_count % 5 == 0:
+                with open(output_file, 'w') as f:
+                    json.dump(results, f, indent=2)
+                print(f"  [Saved progress to {output_file}]")
             
             time.sleep(1) # Rate limit niceness
             
+        # Final save
         with open(output_file, 'w') as f:
             json.dump(results, f, indent=2)
-        print(f"Saved AI classification results to {output_file}")
+        print(f"Saved all AI classification results to {output_file}")
 
 def main():
     load_env()

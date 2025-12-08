@@ -36,6 +36,17 @@ This project mines GitHub repositories for "Self-Correction" pairs (Bad Commit -
   python3 gemini_classifier.py android/nowinandroid
   ```
 
+## Resumability
+Both `mine_fixes.py` and `gemini_classifier.py` support resuming if interrupted.
+
+- **Mining**: Uses a state file (default `mining_state.json`) to save the cursor.
+  - To resume: Just run the same command again.
+  - To restart: Delete `mining_state.json` and `mining_results.json`.
+
+- **AI Classification**: Checks `ai_classified_results.json` for existing entries.
+  - To resume: Run the command again; it skips already classified pairs.
+  - To restart: Delete `ai_classified_results.json`.
+
 ## Setup
 
 1.  **Install Dependencies**:

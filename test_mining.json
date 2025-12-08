@@ -1,0 +1,34 @@
+[
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "56c4b24ae6284ab650044e9a00575e2ac14a5756",
+    "bad_msg": "Update NiaAppStateTest to use new InterestsNavKey",
+    "good_commit": "5ea5a64786d734e692bbdad6900381b44057a6fd",
+    "good_msg": "\ud83e\udd16 Updates screenshots"
+  },
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "eae7a5bef5fb6be8acf78ed8d72494ebd457ba68",
+    "bad_msg": "feat: Update target and compile SDK to 36",
+    "good_commit": "53cbbbf594896dab5f3d185655d0208ac22fbead",
+    "good_msg": "Rename settings feature string resources"
+  },
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "92fd6f66056b562f04fc22aabb5c79b74f66d603",
+    "bad_msg": "Remove feature module READMEs (they will be replaced by submodule READMEs)",
+    "good_commit": "8f269ff57ad623c252e51e40b7f0f741c0b874ba",
+    "good_msg": "Fix module graph generation."
+  },
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "b828179a8d98970c81c121955fb021f4e8325e9b",
+    "bad_msg": "Scope ViewModels to navigation entries.",
+    "good_commit": "fe5bfdeccfccae82766fef58609d943bbda0738d",
+    "good_msg": "Fix spotless"
+  }
+]

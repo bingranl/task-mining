@@ -194,10 +194,37 @@ class GitHubMiner:
             
         return all_commits
 
-    def mine(self, limit: int) -> List[Dict[str, Any]]:
-        """Mines the repository for Bad -> Good commit pairs."""
+    def load_state(self, state_file: str) -> Optional[str]:
+        if os.path.exists(state_file):
+            try:
+                with open(state_file, 'r') as f:
+                    state = json.load(f)
+                    return state.get("cursor")
+            except Exception as e:
+                print(f"Warning: Could not load state file: {e}")
+        return None
+
+    def save_state(self, state_file: str, cursor: str):
+        with open(state_file, 'w') as f:
+            json.dump({"cursor": cursor}, f)
+
+    def mine(self, limit: int, output_file: str, state_file: str) -> List[Dict[str, Any]]:
+        """Mines the repository for Bad -> Good commit pairs with resumability."""
         results = []
-        cursor = None
+        
+        # Load existing results if they exist, to avoid overwriting
+        if os.path.exists(output_file):
+            try:
+                with open(output_file, 'r') as f:
+                    results = json.load(f)
+                    print(f"Loaded {len(results)} existing pairs from {output_file}")
+            except Exception:
+                print("Warning: Could not load existing results, starting fresh list.")
+        
+        cursor = self.load_state(state_file)
+        if cursor:
+            print(f"Resuming from cursor: {cursor}")
+            
         processed_count = 0
         
         while processed_count < limit:
@@ -219,30 +246,26 @@ class GitHubMiner:
             prs = data["data"]["repository"]["pullRequests"]
             nodes = prs["nodes"]
             
+            if not nodes:
+                print("No more PRs found.")
+                break
+            
+            batch_results = []
             for pr in nodes:
                 pr_number = pr["number"]
                 commits = self.get_all_commits_for_pr(pr)
-                
-                # Sort commits by date just in case, though GraphQL usually returns ordered
-                # But we requested DESC in PRs, commits inside PR are usually ASC?
-                # Let's verify order. The default order for commits connection is usually ASC.
-                # We'll assume ASC (oldest first) for logic "Bad -> Good".
-                
-                # Logic: Find a Bad commit, then look for a subsequent Good commit.
-                # We iterate through commits.
                 
                 last_bad_commit = None
                 
                 for commit_node in commits:
                     commit = commit_node["commit"]
                     oid = commit["oid"]
-                    msg = commit["message"].split('\n')[0] # First line only
+                    msg = commit["message"].split('\n')[0]
                     
                     if self.is_build_failed(commit_node):
                         last_bad_commit = commit_node
                     elif self.is_build_successful(commit_node):
                         if last_bad_commit:
-                            # Found a pair!
                             bad_commit = last_bad_commit["commit"]
                             pair = {
                                 "pr_id": pr_number,
@@ -252,17 +275,26 @@ class GitHubMiner:
                                 "good_commit": oid,
                                 "good_msg": msg
                             }
-                            results.append(pair)
-                            print(f"Found pair in PR #{pr_number}: {bad_commit['oid'][:7]} (Bad) -> {oid[:7]} (Good)")
+                            # Check for duplicates before adding
+                            if not any(r['good_commit'] == oid for r in results) and not any(r['good_commit'] == oid for r in batch_results):
+                                batch_results.append(pair)
+                                print(f"Found pair in PR #{pr_number}: {bad_commit['oid'][:7]} -> {oid[:7]}")
                             
-                            # Reset last_bad_commit to avoid pairing the same bad commit with multiple good ones?
-                            # Or should we? Usually one fix is enough.
-                            # Let's reset to capture distinct pairs.
                             last_bad_commit = None
             
+            results.extend(batch_results)
+            
+            # Save progress after each batch
             processed_count += len(nodes)
             cursor = prs["pageInfo"]["endCursor"]
+            self.save_state(state_file, cursor)
+            
+            with open(output_file, "w") as f:
+                json.dump(results, f, indent=2)
+            print(f"Saved {len(results)} pairs (total) to {output_file}")
+            
             if not prs["pageInfo"]["hasNextPage"]:
+                print("Reached end of PRs.")
                 break
                 
         return results
@@ -275,6 +307,7 @@ def main():
     parser.add_argument("--token", help="GitHub PAT (optional if GITHUB_TOKEN env var is set)")
     parser.add_argument("--limit", type=int, default=100, help="Number of PRs to scan")
     parser.add_argument("--output", default="mining_results.json", help="Output JSON file")
+    parser.add_argument("--state", default="mining_state.json", help="State file for resumability")
     
     args = parser.parse_args()
     
@@ -292,12 +325,8 @@ def main():
     miner = GitHubMiner(token, owner, name)
     print(f"Mining {args.repo} for up to {args.limit} PRs...")
     
-    results = miner.mine(args.limit)
-    
-    print(f"Mining complete. Found {len(results)} pairs.")
-    with open(args.output, "w") as f:
-        json.dump(results, f, indent=2)
-    print(f"Results saved to {args.output}")
+    miner.mine(args.limit, args.output, args.state)
+    print("Mining complete.")
 
 if __name__ == "__main__":
     main()
