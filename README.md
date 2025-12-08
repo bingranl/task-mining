@@ -4,6 +4,19 @@ This project mines GitHub repositories for "Self-Correction" pairs (Bad Commit -
 
 ## Scripts
 
+### 0. `run_pipeline.py` (The All-in-One)
+**Function**: Runs the entire pipeline (Mining -> Analysis -> AI).
+- **Usage (Single Repo)**:
+  ```bash
+  python3 run_pipeline.py android/nowinandroid --limit 100
+  ```
+- **Usage (Multi-Repo)**:
+  Create a file `repos.txt` with one repo per line, then:
+  ```bash
+  python3 run_pipeline.py repos.txt --limit 100
+  ```
+  Results will be saved in `results/{owner}_{name}/`.
+
 ### 1. `mine_fixes.py` (The Miner)
 **Function**: Identifies "Self-Correction" pairs in merged PRs.
 - **Logic**: Scans PRs for a sequence of `Failure -> Success` commits.
