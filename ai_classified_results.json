@@ -1,0 +1,231 @@
+[
+  {
+    "pr_id": 1957,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1957",
+    "bad_commit": "8af63fc67b937449cd1ba103950f429bc41eff0b",
+    "bad_msg": "RTL Spotless error fixed",
+    "good_commit": "132bb0cbd7f81b2b40853b57d2b5c15904ece867",
+    "good_msg": "RTL Spotless workflow fixed.",
+    "files_changed": [
+      "core/designsystem/src/main/kotlin/com/google/samples/apps/nowinandroid/core/designsystem/theme/Type.kt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "92fd6f66056b562f04fc22aabb5c79b74f66d603",
+    "bad_msg": "Remove feature module READMEs (they will be replaced by submodule READMEs)",
+    "good_commit": "8f269ff57ad623c252e51e40b7f0f741c0b874ba",
+    "good_msg": "Fix module graph generation.",
+    "files_changed": [
+      "app/README.md",
+      "benchmarks/README.md",
+      "build-logic/convention/src/main/kotlin/com/google/samples/apps/nowinandroid/Graph.kt",
+      "feature/bookmarks/api/README.md",
+      "feature/bookmarks/impl/README.md",
+      "feature/foryou/api/README.md",
+      "feature/foryou/impl/README.md",
+      "feature/interests/api/README.md",
+      "feature/search/api/README.md",
+      "feature/search/impl/README.md",
+      "feature/settings/impl/README.md",
+      "sync/sync-test/README.md",
+      "sync/work/README.md"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "b828179a8d98970c81c121955fb021f4e8325e9b",
+    "bad_msg": "Scope ViewModels to navigation entries.",
+    "good_commit": "fe5bfdeccfccae82766fef58609d943bbda0738d",
+    "good_msg": "Fix spotless",
+    "files_changed": [
+      "core/navigation/src/main/kotlin/com/google/samples/apps/nowinandroid/core/navigation/NavigationState.kt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "eae7a5bef5fb6be8acf78ed8d72494ebd457ba68",
+    "bad_msg": "feat: Update target and compile SDK to 36",
+    "good_commit": "53cbbbf594896dab5f3d185655d0208ac22fbead",
+    "good_msg": "Rename settings feature string resources",
+    "files_changed": [
+      "feature/settings/impl/src/androidTest/kotlin/com/google/samples/apps/nowinandroid/feature/settings/impl/SettingsDialogTest.kt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "56c4b24ae6284ab650044e9a00575e2ac14a5756",
+    "bad_msg": "Update NiaAppStateTest to use new InterestsNavKey",
+    "good_commit": "5ea5a64786d734e692bbdad6900381b44057a6fd",
+    "good_msg": "\ud83e\udd16 Updates screenshots",
+    "files_changed": [
+      "app/src/testDemo/screenshots/compactWidth_compactHeight_showsNavigationBar.png",
+      "app/src/testDemo/screenshots/compactWidth_expandedHeight_showsNavigationBar.png",
+      "app/src/testDemo/screenshots/compactWidth_mediumHeight_showsNavigationBar.png",
+      "app/src/testDemo/screenshots/expandedWidth_compactHeight_showsNavigationBar.png",
+      "app/src/testDemo/screenshots/expandedWidth_expandedHeight_showsNavigationRail.png",
+      "app/src/testDemo/screenshots/expandedWidth_mediumHeight_showsNavigationRail.png",
+      "app/src/testDemo/screenshots/insets_snackbar_compact_medium_noSnackbar.png",
+      "app/src/testDemo/screenshots/insets_snackbar_expanded_expanded.png",
+      "app/src/testDemo/screenshots/insets_snackbar_medium_medium.png",
+      "app/src/testDemo/screenshots/mediumWidth_compactHeight_showsNavigationBar.png",
+      "app/src/testDemo/screenshots/mediumWidth_expandedHeight_showsNavigationRail.png",
+      "app/src/testDemo/screenshots/mediumWidth_mediumHeight_showsNavigationRail.png",
+      "app/src/testDemo/screenshots/snackbar_compact_medium.png",
+      "app/src/testDemo/screenshots/snackbar_compact_medium_noSnackbar.png",
+      "app/src/testDemo/screenshots/snackbar_expanded_expanded.png",
+      "app/src/testDemo/screenshots/snackbar_medium_medium.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenLoading_foldable.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenLoading_phone.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenLoading_tablet.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenPopulatedAndLoading_foldable.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenPopulatedAndLoading_phone.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenPopulatedAndLoading_phone_dark.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenPopulatedAndLoading_tablet.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenPopulatedFeed_foldable.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenPopulatedFeed_phone.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenPopulatedFeed_tablet.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenTopicSelection_foldable.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenTopicSelection_phone.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenTopicSelection_phone_dark.png",
+      "feature/foryou/impl/src/test/screenshots/ForYouScreenTopicSelection_tablet.png"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1930,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1930",
+    "bad_commit": "c48c8381e1d97eccfdcd367759c8af5d5cdaa4d6",
+    "bad_msg": "Upgradle to 9.0.0",
+    "good_commit": "7ff1913855ad1db355875502e964d7e12947241b",
+    "good_msg": "Fixes host test tasks that were accidentally attemping to run",
+    "files_changed": [
+      "app/build.gradle.kts",
+      "build-logic/convention/src/main/kotlin/com/google/samples/apps/nowinandroid/AndroidCompose.kt",
+      "core/data/build.gradle.kts",
+      "core/designsystem/build.gradle.kts",
+      "core/network/build.gradle.kts",
+      "feature/foryou/build.gradle.kts"
+    ],
+    "category": "Dependency Update",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1953,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1953",
+    "bad_commit": "29e3dae0621aaf7a6e6928b7516d88a25259ceb6",
+    "bad_msg": "Fix workflow",
+    "good_commit": "c21ce2dcbe12eee346be2d39511aaf840a09741e",
+    "good_msg": "Fix graphUpdate naming in workflow",
+    "files_changed": [
+      ".github/workflows/Build.yaml"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1886,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1886",
+    "bad_commit": "84dbcb678acfdc8da8148d2bb58501d6bf32d957",
+    "bad_msg": "Exclude the ime window inset at the snack bar.",
+    "good_commit": "9b33232fc798af1775f4f2060ea3579480006cc2",
+    "good_msg": "Fix spotless.",
+    "files_changed": [
+      "app/src/main/kotlin/com/google/samples/apps/nowinandroid/ui/NiaApp.kt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1873,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1873",
+    "bad_commit": "8755ef3fc994c65c9bb5c41008f74badfca6ff71",
+    "bad_msg": "Allow build for PR on all branches",
+    "good_commit": "b6f7d717f720ab989cab7acbbb33dddf5cc9c014",
+    "good_msg": "Remove the push trigger for NightlyBaselineProfiles.yaml",
+    "files_changed": [
+      ".github/workflows/NightlyBaselineProfiles.yaml"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1913,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1913",
+    "bad_commit": "149a345595624742ce1a2a27fb518a10f3a87b9a",
+    "bad_msg": "Move to a custom setup for BuildConfig.BACKEND_URL",
+    "good_commit": "abac757e9f294e2139cdf6b69dabbb547075b2dc",
+    "good_msg": "Add a comment for simplification",
+    "files_changed": [
+      "core/network/build.gradle.kts"
+    ],
+    "category": "Dependency Update",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1798,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1798",
+    "bad_commit": "793317bfbd8cd18eea0395d8e0ec65da408d8c81",
+    "bad_msg": "Update core/data/src/test/kotlin/com/google/samples/apps/nowinandroid/core/data/repository/OfflineFirstTopicsRepositoryTest.kt",
+    "good_commit": "b7973eeac9944da1e692ae91be2f00f9104bd6bd",
+    "good_msg": "Fix spotless",
+    "files_changed": [
+      "core/data/src/test/kotlin/com/google/samples/apps/nowinandroid/core/data/repository/OfflineFirstTopicsRepositoryTest.kt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1798,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1798",
+    "bad_commit": "b651b2ed4d7d73edccb4e2b484606418adea8fec",
+    "bad_msg": "Update OfflineFirstTopicsRepositoryTest.kt",
+    "good_commit": "dfc55c94e3fa7950df0c7d26315d0e7f10bbc4d4",
+    "good_msg": "Update core/data/src/test/kotlin/com/google/samples/apps/nowinandroid/core/data/repository/OfflineFirstTopicsRepositoryTest.kt",
+    "files_changed": [
+      "core/data/src/test/kotlin/com/google/samples/apps/nowinandroid/core/data/repository/OfflineFirstTopicsRepositoryTest.kt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1799,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1799",
+    "bad_commit": "fa532089e2f8a26f00469d9312e72e375fb338a0",
+    "bad_msg": "Update OfflineFirstNewsRepositoryTest.kt",
+    "good_commit": "ef0d89e9fbacb228855cf20e4901e6963f53964f",
+    "good_msg": "Update core/data/src/test/kotlin/com/google/samples/apps/nowinandroid/core/data/repository/OfflineFirstNewsRepositoryTest.kt",
+    "files_changed": [
+      "core/data/src/test/kotlin/com/google/samples/apps/nowinandroid/core/data/repository/OfflineFirstNewsRepositoryTest.kt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "NO"
+  },
+  {
+    "pr_id": 1835,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1835",
+    "bad_commit": "e25b3634ca6cd2126a5d9257aefcf8c47db85312",
+    "bad_msg": "Add predictive back and pane expansion back handling",
+    "good_commit": "ce85daa8e871df0a303dc252fdf493b123585cd9",
+    "good_msg": "\ud83e\udd16 Updates baselines for Dependency Guard",
+    "files_changed": [
+      "app-nia-catalog/dependencies/releaseRuntimeClasspath.txt",
+      "app/dependencies/prodReleaseRuntimeClasspath.txt"
+    ],
+    "category": "Other",
+    "ai_is_dependency_update": "YES"
+  }
+]
