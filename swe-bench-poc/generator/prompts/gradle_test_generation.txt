@@ -1,0 +1,191 @@
+You are an expert in Gradle build systems and test generation. Your task is to generate Gradle Test Kit tests that verify build script changes.
+
+## Context
+
+We have two versions of a build script:
+- **Original (O)**: The broken/incorrect version
+- **Modified (M)**: The fixed/correct version
+
+## Task Description
+{task_description}
+
+## Build Script Diff
+```diff
+{diff}
+```
+
+## Your Goal
+
+Generate a Java test class using Gradle Test Kit that:
+1. **FAILS when run against the Original (O) build script**
+2. **PASSES when run against the Modified (M) build script**
+
+The test should verify the specific functional change, not just "builds successfully".
+
+## Guidelines
+
+1. **Be Specific**: Test the exact change (dependency version, task existence, configuration value, etc.)
+2. **Use Gradle Test Kit APIs**:
+   - `GradleRunner.create()` to run builds
+   - `.withProjectDir()` to set the project directory
+   - `.withArguments()` to specify Gradle tasks/flags
+   - `.build()` or `.buildAndFail()` for expected outcomes
+3. **Inspect Outputs**: Use `result.getOutput()` to verify specific content
+4. **Test Task Outcomes**: Use `result.task(":taskName").getOutcome()` when appropriate
+5. **Handle Dependencies**: Use `dependencies` task to verify dependency versions
+6. **Check Configurations**: Verify plugin applications, task configurations, etc.
+
+## Example Test Patterns
+
+### Pattern 1: Dependency Version
+```java
+@Test
+public void testCorrectDependencyVersion() {
+    BuildResult result = GradleRunner.create()
+        .withProjectDir(projectDir)
+        .withArguments("dependencies", "--configuration", "implementation")
+        .build();
+    
+    assertTrue(result.getOutput().contains("com.example:library:2.0.0"));
+    assertFalse(result.getOutput().contains("com.example:library:1.0.0"));
+}
+```
+
+### Pattern 2: Task Existence
+```java
+@Test
+public void testCustomTaskExists() {
+    BuildResult result = GradleRunner.create()
+        .withProjectDir(projectDir)
+        .withArguments("tasks", "--all")
+        .build();
+    
+    assertTrue(result.getOutput().contains("customTask"));
+}
+```
+
+### Pattern 3: Build Success/Failure
+```java
+@Test
+public void testBuildSucceeds() {
+    BuildResult result = GradleRunner.create()
+        .withProjectDir(projectDir)
+        .withArguments("build")
+        .build();
+    
+    assertEquals(TaskOutcome.SUCCESS, result.task(":build").getOutcome());
+}
+```
+
+### Pattern 4: Plugin Application
+```java
+@Test
+public void testPluginApplied() {
+    BuildResult result = GradleRunner.create()
+        .withProjectDir(projectDir)
+        .withArguments("plugins")
+        .build();
+    
+    assertTrue(result.getOutput().contains("com.example.plugin"));
+}
+```
+
+## Output Format
+
+Generate a complete Java test class that follows this exact structure:
+
+### Critical Constraints - DO NOT VIOLATE:
+
+**FORBIDDEN ACTIONS** - Your test must NOT include any of the following:
+- ❌ DO NOT create source directories (src/main/java, src/test/java, etc.)
+- ❌ DO NOT create AndroidManifest.xml or any Android-specific files
+- ❌ DO NOT create gradle.properties files
+- ❌ DO NOT create additional configuration files beyond settings.gradle.kts
+- ❌ DO NOT create any source code files (.java, .kt, etc.)
+- ❌ DO NOT set up project-specific directory structures
+- ❌ DO NOT add environment-specific setup
+
+**REQUIRED MINIMAL SETUP** - Your test must ONLY:
+- ✅ Create settings.gradle.kts with minimal content (rootProject.name only)
+- ✅ Copy the build file from system property to temp directory
+- ✅ Run GradleRunner with appropriate arguments
+- ✅ Assert on the build output or build file content
+
+The test framework and runner handle all environment setup. Your test should focus ONLY on verifying the specific build script change.
+
+### Required Structure:
+1. **Class name**: `BuildScriptTest` (exactly this name)
+2. **Imports**: Include all necessary imports (see example below)
+3. **@TempDir**: Use JUnit 5's `@TempDir Path tempDir` for temporary directory
+4. **Build file loading**: Read build file path from system property `sample.buildFile`
+5. **Project setup** (MINIMAL ONLY): 
+   - Create `settings.gradle.kts` with ONLY: `rootProject.name = "test-project"\n`
+   - Copy the build file from system property to temp directory
+   - NOTHING ELSE - no other files, directories, or configurations
+6. **Test execution**: Run GradleRunner with appropriate arguments
+7. **Assertions**: Make specific assertions about the output with meaningful messages
+
+### Template Structure:
+```java
+import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.GradleRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class BuildScriptTest {
+
+    @TempDir
+    Path tempDir;
+
+    @Test
+    public void testYourSpecificChange() throws IOException {
+        // 1. Get build file path from system property
+        String buildFilePath = System.getProperty("sample.buildFile");
+        assertNotNull(buildFilePath, "System property 'sample.buildFile' must be set by the runner");
+
+        // 2. Setup project directory - MINIMAL SETUP ONLY
+        File projectDir = tempDir.toFile();
+        Files.writeString(new File(projectDir, "settings.gradle.kts").toPath(), "rootProject.name = \"test-project\"\n");
+
+        // 3. Copy build file to project directory
+        Files.copy(
+                Path.of(buildFilePath),
+                new File(projectDir, "build.gradle.kts").toPath(),
+                StandardCopyOption.REPLACE_EXISTING
+        );
+
+        // DO NOT ADD: source directories, manifest files, gradle.properties, or any other setup
+        // The test framework handles all environment setup
+
+        // 4. Run Gradle with appropriate arguments
+        BuildResult result = GradleRunner.create()
+                .withProjectDir(projectDir)
+                .withArguments("your-task", "--configuration", "yourConfig", "--stacktrace")
+                .build();
+
+        // 5. Assert specific expectations
+        assertTrue(
+                result.getOutput().contains("expected-content"),
+                "Expected specific content in output"
+        );
+    }
+}
+```
+
+## Important Notes
+
+- The test should be **deterministic** and **reliable**
+- Focus on the **functional change**, not implementation details
+- Ensure the test **clearly demonstrates** the difference between O and M
+- Use **appropriate Gradle arguments** for the verification
+- Include **helpful assertion messages** for debugging
+
+Now, generate the test class:
