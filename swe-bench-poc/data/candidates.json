@@ -1,0 +1,69 @@
+[
+  {
+    "pr_id": 2003,
+    "pr_url": "https://github.com/android/nowinandroid/pull/2003",
+    "bad_commit": "92fd6f66056b562f04fc22aabb5c79b74f66d603",
+    "bad_msg": "Remove feature module READMEs (they will be replaced by submodule READMEs)",
+    "good_commit": "8f269ff57ad623c252e51e40b7f0f741c0b874ba",
+    "good_msg": "Fix module graph generation.",
+    "build_files_changed": [
+      "build-logic/convention/src/main/kotlin/com/google/samples/apps/nowinandroid/Graph.kt"
+    ],
+    "all_files_changed": [
+      "app/README.md",
+      "benchmarks/README.md",
+      "build-logic/convention/src/main/kotlin/com/google/samples/apps/nowinandroid/Graph.kt",
+      "feature/bookmarks/api/README.md",
+      "feature/bookmarks/impl/README.md",
+      "feature/foryou/api/README.md",
+      "feature/foryou/impl/README.md",
+      "feature/interests/api/README.md",
+      "feature/search/api/README.md",
+      "feature/search/impl/README.md",
+      "feature/settings/impl/README.md",
+      "sync/sync-test/README.md",
+      "sync/work/README.md"
+    ],
+    "category": "Other"
+  },
+  {
+    "pr_id": 1930,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1930",
+    "bad_commit": "c48c8381e1d97eccfdcd367759c8af5d5cdaa4d6",
+    "bad_msg": "Upgradle to 9.0.0",
+    "good_commit": "7ff1913855ad1db355875502e964d7e12947241b",
+    "good_msg": "Fixes host test tasks that were accidentally attemping to run",
+    "build_files_changed": [
+      "app/build.gradle.kts",
+      "build-logic/convention/src/main/kotlin/com/google/samples/apps/nowinandroid/AndroidCompose.kt",
+      "core/data/build.gradle.kts",
+      "core/designsystem/build.gradle.kts",
+      "core/network/build.gradle.kts",
+      "feature/foryou/build.gradle.kts"
+    ],
+    "all_files_changed": [
+      "app/build.gradle.kts",
+      "build-logic/convention/src/main/kotlin/com/google/samples/apps/nowinandroid/AndroidCompose.kt",
+      "core/data/build.gradle.kts",
+      "core/designsystem/build.gradle.kts",
+      "core/network/build.gradle.kts",
+      "feature/foryou/build.gradle.kts"
+    ],
+    "category": "Dependency Update"
+  },
+  {
+    "pr_id": 1913,
+    "pr_url": "https://github.com/android/nowinandroid/pull/1913",
+    "bad_commit": "149a345595624742ce1a2a27fb518a10f3a87b9a",
+    "bad_msg": "Move to a custom setup for BuildConfig.BACKEND_URL",
+    "good_commit": "abac757e9f294e2139cdf6b69dabbb547075b2dc",
+    "good_msg": "Add a comment for simplification",
+    "build_files_changed": [
+      "core/network/build.gradle.kts"
+    ],
+    "all_files_changed": [
+      "core/network/build.gradle.kts"
+    ],
+    "category": "Dependency Update"
+  }
+]

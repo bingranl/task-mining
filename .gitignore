@@ -1,3 +1,5 @@
 .env
 __pycache__/
 *.pyc
+.idea/
+/swe-bench-poc/gradle-testkit-framework/.gradle/
